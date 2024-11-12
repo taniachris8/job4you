@@ -82,6 +82,7 @@ export const FilterProvider = ({ children }) => {
         setSelectedFilters,
         filteredJobs,
         applyFilters,
+        setFilteredJobs,
       }}
     >
       {children}

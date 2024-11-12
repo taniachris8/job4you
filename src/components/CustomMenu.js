@@ -1,12 +1,9 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
-// forwardRef again here!
-// Dropdown needs access to the DOM of the Menu to measure it
+
 const CustomMenu = React.forwardRef(
   ({ children, style, className, "aria-labelledby": labeledBy }, ref) => {
     const [value, setValue] = useState("");
-
-
 
     return (
       <div
@@ -28,10 +25,7 @@ const CustomMenu = React.forwardRef(
               (child) =>
                 !value || child.props.children.toLowerCase().startsWith(value)
             )
-            .map((child) =>
-              React.cloneElement(child, {
-              })
-            )}
+            .map((child) => React.cloneElement(child, {}))}
         </ul>
       </div>
     );

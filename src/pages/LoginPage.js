@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import "./pages-css/LoginPage.css";

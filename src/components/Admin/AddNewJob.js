@@ -7,8 +7,11 @@ import domainOptions from "../options/DomainOptions.js";
 import professionOptions from "../options/ProfessionOptions.js";
 import areaOptions from "../options/AreaOptions.js";
 import scopeOptions from "../options/ScopeOptions.js";
+import { ApiService } from "../../services/ApiService.js";
+import { API_URL } from "../../consts/general.js";
 
-function AddNewJob({ onHide, showAddNewJob }) {
+function AddNewJob({ onHide, showAddNewJob, fetchJobs }) {
+  const ApiJobs = new ApiService(API_URL);
   const [jobTitle, setJobTitle] = useState("");
   const [domain, setDomain] = useState("");
   const [profession, setProfession] = useState("");
@@ -32,29 +35,42 @@ function AddNewJob({ onHide, showAddNewJob }) {
     };
 
     try {
-      const response = await fetch("http://localhost:8080/jobs", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newJob),
-      });
+      // const response = await fetch("http://localhost:8080/jobs", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify(newJob),
+      // });
 
-      if (response.ok) {
-        const result = await response.json();
-        console.log("Job added successfully", result);
-        setJobTitle("");
-        setDomain("");
-        setProfession("");
-        setArea("");
-        setScope("");
-        setJobNumber("");
-        setJobDescription("");
-        setJobRequirements("");
-        onHide();
-      } else {
-        console.error("Failed to add job");
-      }
+      await ApiJobs.postJob(newJob);
+
+      // if (response.ok) {
+      //   const result = await response.json();
+      //   console.log("Job added successfully", result);
+      //   setJobTitle("");
+      //   setDomain("");
+      //   setProfession("");
+      //   setArea("");
+      //   setScope("");
+      //   setJobNumber("");
+      //   setJobDescription("");
+      //   setJobRequirements("");
+      //   onHide();
+      // } else {
+      //   console.error("Failed to add job");
+      // }
+      setJobTitle("");
+      setDomain("");
+      setProfession("");
+      setArea("");
+      setScope("");
+      setJobNumber("");
+      setJobDescription("");
+      setJobRequirements("");
+      onHide();
+      alert("Job has been successfully added");
+      fetchJobs();
     } catch (error) {
       console.error("Error:", error);
     }

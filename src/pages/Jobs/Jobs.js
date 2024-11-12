@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from "react";
-import axios from "axios";
 import "./Jobs.css";
 import FilterSidebar from "../../components/FilterJobs/FilterSidebar.js";
 import JobItem from "../../components/JobComponents/JobItem.js";
@@ -47,6 +46,7 @@ function Jobs() {
   }, [setSelectedFilters]);
 
   useEffect(() => {
+    console.log("filtered jobs", filteredJobs);
     setCurrentJobs(filteredJobs.slice(indexOfFirstJob, indexOfLastJob));
   }, [filteredJobs, currentPage]);
 
@@ -88,11 +88,12 @@ function Jobs() {
     }
   };
 
-  const handleDeleteJob = (id) => {
+  const handleDeleteJob = (_id) => {
     // .delete(`http://localhost:8080/jobs/${id}`)
-    ApiJobService.deleteJob(id)
+    ApiJobService.deleteJob(_id)
       .then((response) => {
         console.log("Job deleted:", response);
+        alert("Job has been successfully deleted");
         fetchJobs();
       })
       .catch((error) => {
@@ -100,12 +101,13 @@ function Jobs() {
       });
   };
 
-  const handleEditJob = (id, updatedJob) => {
+  const handleEditJob = (_id, updatedJob) => {
     // axios
     //   .put(`http://localhost:8080/jobs/${id}`, updatedJob)
-    ApiJobService.updateJob(id, updatedJob)
+    ApiJobService.updateJob(_id, updatedJob)
       .then((response) => {
         console.log("Job updated:", response);
+        console.log([...currentJobs, response.data.job]);
         fetchJobs();
       })
       .catch((error) => {
@@ -136,7 +138,7 @@ function Jobs() {
           <div className="job-items-wrapper">
             {currentJobs.length > 0 ? (
               currentJobs.map((job) => (
-                <div className="job-item" key={job.id}>
+                <div className="job-item" key={job._id}>
                   <JobItem
                     jobTitle={job.jobTitle}
                     area={job.area}
@@ -147,8 +149,8 @@ function Jobs() {
                     jobNumber={job.jobNumber}
                     jobDescription={job.jobDescription}
                     jobRequirements={job.jobRequirements}
-                    onDelete={() => handleDeleteJob(job.id)}
-                    onEdit={(updatedJob) => handleEditJob(job.id, updatedJob)}
+                    onDelete={() => handleDeleteJob(job._id)}
+                    onEdit={(updatedJob) => handleEditJob(job._id, updatedJob)}
                   />
                 </div>
               ))
@@ -174,6 +176,7 @@ function Jobs() {
             handleCloseAddJobModal={handleCloseAddJobModal}
             setShowAddNewJob={setShowAddNewJob}
             handleShowAddJobModal={handleShowAddJobModal}
+            fetchJobs={fetchJobs}
           />
         </div>
       </div>

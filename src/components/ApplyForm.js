@@ -3,13 +3,12 @@ import { useState, useRef } from "react";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import "./components-css/ApplyForm.css";
-import Alert from "react-bootstrap/Alert";
 import Button from "./Buttons/Button";
 
 function ApplyForm({ onHide, showApplyForm }) {
   const [cvFile, setCvFile] = useState(null);
-  const [showAlert, setShowAlert] = useState(false);
-  const [showErrorAlert, setShowErrorAlert] = useState(false);
+  // const [showAlert, setShowAlert] = useState(false);
+  // const [showErrorAlert, setShowErrorAlert] = useState(false);
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [userPhone, setUserPhone] = useState("");

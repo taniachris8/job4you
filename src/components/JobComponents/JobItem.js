@@ -29,10 +29,10 @@ function JobItem({
     scope,
     jobNumber,
     jobDescription,
-    jobRequirements
+    jobRequirements,
   });
 
-  const { user } = useAuth(); 
+  const { user } = useAuth();
   const navigate = useNavigate();
 
   const handleCloseModal = () => setShowApplyForm(false);
@@ -59,25 +59,24 @@ function JobItem({
     onEdit(editedJob);
     setShowEditForm(false);
   };
-  
 
   return (
     <>
-    {user && user.role === 'admin' && (
-      <div className="admin-btns">
-        <i
-          class="fa-solid fa-pen-to-square edit-btn"
-          onClick={handleEditClick}
-        ></i>
-        <i
-          class="fa-solid fa-trash delete-btn"
-          onClick={(e) => {
-            e.preventDefault();
-            onDelete(id);
-          }}
-        ></i>
-      </div>
-    )}
+      {user && user.role === "admin" && (
+        <div className="admin-btns">
+          <i
+            class="fa-solid fa-pen-to-square edit-btn"
+            onClick={handleEditClick}
+          ></i>
+          <i
+            class="fa-solid fa-trash delete-btn"
+            onClick={(e) => {
+              e.preventDefault();
+              onDelete(id);
+            }}
+          ></i>
+        </div>
+      )}
       <Link to={`/jobs/${id}`} className="job-item-link">
         <div className="jobs__item">
           <h1 className="jobs-item-title">{jobTitle}</h1>

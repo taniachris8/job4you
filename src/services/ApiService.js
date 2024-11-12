@@ -43,6 +43,14 @@ export class ApiService {
     return axios.delete(`${this.baseURL}/jobs/${jobId}`);
   };
   updateJob = (jobId, updatedJob) => {
-    return axios.put(`${this.baseURL}/jobs/${jobId}`);
+    return axios.put(`${this.baseURL}/jobs/${jobId}`, { ...updatedJob });
+  };
+
+  postJob = (newJob) => {
+    return axios.post(`${this.baseURL}/jobs`, newJob, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
   };
 }

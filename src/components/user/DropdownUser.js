@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import "./DropdownUser.css";
 import Dropdown from "react-bootstrap/Dropdown";
 import Button from "../Buttons/Button.js";
@@ -17,37 +17,33 @@ function DropdownUser({ showDropdownUser, onToggle, iconRef }) {
   };
   useEffect(() => {
     if (iconRect) {
-      console.log(iconRect);  // This will show the icon's position and dimensions
+      console.log(iconRect); // This will show the icon's position and dimensions
     }
   }, [iconRect]);
 
   return (
-    
-    <Dropdown
-      show={showDropdownUser}
-      onToggle={onToggle}
-    >
+    <Dropdown show={showDropdownUser} onToggle={onToggle}>
       <Dropdown.Menu className="dropdown-menu">
         {user ? (
           <>
             <Dropdown.Item href="#/action-1" className="dropdown-item">
               {user.name} {user.familyName}
             </Dropdown.Item>
-            <Dropdown.Item href="#/action-2" className="dropdown-item">
-              <Link className="dropdown-link" to="/users-settings">
+            <Link className="dropdown-link" to="/users-settings">
+              <Dropdown.Item href="#/action-2" className="dropdown-item">
                 Settings
-              </Link>
-            </Dropdown.Item>
-            <Dropdown.Item href="#/action-3" className="dropdown-item">
-              <Link className="dropdown-link" to="/users-savedJobs">
+              </Dropdown.Item>
+            </Link>
+            <Link className="dropdown-link" to="/users-savedJobs">
+              <Dropdown.Item href="#/action-3" className="dropdown-item">
                 Saved Jobs
-              </Link>
-            </Dropdown.Item>
-            <Dropdown.Item href="#/action-3" className="dropdown-item">
-              <Link className="dropdown-link" to="/users-CV">
+              </Dropdown.Item>
+            </Link>
+            <Link className="dropdown-link" to="/users-CV">
+              <Dropdown.Item href="#/action-3" className="dropdown-item">
                 My CVs
-              </Link>
-            </Dropdown.Item>
+              </Dropdown.Item>
+            </Link>
             <Button variant="logout" onClick={handleLogout}>
               Logout
             </Button>
@@ -57,7 +53,6 @@ function DropdownUser({ showDropdownUser, onToggle, iconRef }) {
         )}
       </Dropdown.Menu>
     </Dropdown>
-    
   );
 }
 
